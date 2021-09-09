@@ -29,12 +29,6 @@ components:
       image: registry.access.redhat.com/ubi8/ubi-minimal
       command: ['tail']
       args: ['-f', '/dev/null']
-      endpoints:
-        - exposure: public
-          name: hello-greeting-endpoint
-          protocol: http
-          targetPort: 8080
-          path: /hello/greeting/che-user
       memoryLimit: 64M
       mountSources: true
 
