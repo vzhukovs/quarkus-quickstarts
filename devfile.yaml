@@ -4,7 +4,7 @@ metadata:
 components:
   - name: tools
     container:
-      image: quay.io/eclipse/che-quarkus:next
+      image: quay.io/devfile/universal-developer-image:ubi8-d433ed6
       env:
         - name: QUARKUS_HTTP_HOST
           value: 0.0.0.0
@@ -31,7 +31,6 @@ components:
       args: ['-f', '/dev/null']
       memoryLimit: 64M
       mountSources: true
-
 
   - name: m2
     volume:
@@ -62,7 +61,6 @@ commands:
       group:
         kind: run
         isDefault: true
-
   - id: startnative
     exec:
       label: "Start Native"
