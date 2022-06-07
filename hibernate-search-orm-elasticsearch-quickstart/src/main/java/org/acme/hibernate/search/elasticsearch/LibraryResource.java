@@ -12,21 +12,17 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.acme.hibernate.search.elasticsearch.model.Author;
 import org.acme.hibernate.search.elasticsearch.model.Book;
 import org.hibernate.search.mapper.orm.session.SearchSession;
-import org.jboss.resteasy.annotations.jaxrs.FormParam;
-import org.jboss.resteasy.annotations.jaxrs.PathParam;
-import org.jboss.resteasy.annotations.jaxrs.QueryParam;
+import org.jboss.resteasy.reactive.RestForm;
+import org.jboss.resteasy.reactive.RestQuery;
 
 import io.quarkus.runtime.StartupEvent;
 
 @Path("/library")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class LibraryResource {
 
     @Inject
@@ -45,7 +41,7 @@ public class LibraryResource {
     @Path("book")
     @Transactional
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void addBook(@FormParam String title, @FormParam Long authorId) {
+    public void addBook(@RestForm String title, @RestForm Long authorId) {
         Author author = Author.findById(authorId);
         if (author == null) {
             return;
@@ -63,7 +59,7 @@ public class LibraryResource {
     @DELETE
     @Path("book/{id}")
     @Transactional
-    public void deleteBook(@PathParam Long id) {
+    public void deleteBook(Long id) {
         Book book = Book.findById(id);
         if (book != null) {
             book.author.books.remove(book);
@@ -75,7 +71,7 @@ public class LibraryResource {
     @Path("author")
     @Transactional
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void addAuthor(@FormParam String firstName, @FormParam String lastName) {
+    public void addAuthor(@RestForm String firstName, @RestForm String lastName) {
         Author author = new Author();
         author.firstName = firstName;
         author.lastName = lastName;
@@ -86,7 +82,7 @@ public class LibraryResource {
     @Path("author/{id}")
     @Transactional
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void updateAuthor(@PathParam Long id, @FormParam String firstName, @FormParam String lastName) {
+    public void updateAuthor(Long id, @RestForm String firstName, @RestForm String lastName) {
         Author author = Author.findById(id);
         if (author == null) {
             return;
@@ -99,7 +95,7 @@ public class LibraryResource {
     @DELETE
     @Path("author/{id}")
     @Transactional
-    public void deleteAuthor(@PathParam Long id) {
+    public void deleteAuthor(Long id) {
         Author author = Author.findById(id);
         if (author != null) {
             author.delete();
@@ -109,8 +105,8 @@ public class LibraryResource {
     @GET
     @Path("author/search")
     @Transactional
-    public List<Author> searchAuthors(@QueryParam String pattern,
-            @QueryParam Optional<Integer> size) {
+    public List<Author> searchAuthors(@RestQuery String pattern,
+            @RestQuery Optional<Integer> size) {
         return searchSession.search(Author.class)
                 .where(f -> pattern == null || pattern.trim().isEmpty() ? f.matchAll()
                         : f.simpleQueryString()

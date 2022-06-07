@@ -10,13 +10,13 @@ Under the hood, this demo uses:
 
 To compile and run this demo you will need:
 
-- JDK 1.8+
+- JDK 11+
 - GraalVM
 
-### Configuring GraalVM and JDK 1.8+
+### Configuring GraalVM and JDK 11+
 
 Make sure that both the `GRAALVM_HOME` and `JAVA_HOME` environment variables have
-been set, and that a JDK 1.8+ `java` command is on the path.
+been set, and that a JDK 11+ `java` command is on the path.
 
 See the [Building a Native Executable guide](https://quarkus.io/guides/building-native-image-guide)
 for help setting up your environment.
@@ -25,7 +25,7 @@ for help setting up your environment.
 
 Launch the Maven build on the checked out sources of this demo:
 
-> ./mvnw install
+> ./mvnw package
 
 ### Live coding with Quarkus
 
@@ -55,7 +55,7 @@ conventional jar file.
 
 First compile it:
 
-> ./mvnw install
+> ./mvnw package
 
 Then run it:
 
@@ -74,7 +74,7 @@ Compiling a native executable takes a bit longer, as GraalVM performs additional
 steps to remove unnecessary codepaths. Use the  `native` profile to compile a
 native executable:
 
-> ./mvnw install -Dnative
+> ./mvnw package -Dnative
 
 After getting a cup of coffee, you'll be able to run this executable directly:
 

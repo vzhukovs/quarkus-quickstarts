@@ -8,15 +8,15 @@ When serving multiple customers from a same application (e.g.: SaaS), each custo
 
 To compile and run this demo you will need:
 
-- JDK 1.8+
+- JDK 11+
 - GraalVM
 
 In addition, you will need either a PostgreSQL database, or Docker to run one.
 
-### Configuring GraalVM and JDK 1.8+
+### Configuring GraalVM and JDK 11+
 
 Make sure that both the `GRAALVM_HOME` and `JAVA_HOME` environment variables have
-been set, and that a JDK 1.8+ `java` command is on the path.
+been set, and that a JDK 11+ `java` command is on the path.
 
 See the [Building a Native Executable guide](https://quarkus.io/guides/building-native-image)
 for help setting up your environment.
@@ -25,7 +25,7 @@ for help setting up your environment.
 
 Launch the Maven build on the checked out sources of this demo:
 
-> ./mvnw install
+> ./mvnw package
 
 ## Running the demo
 
@@ -37,7 +37,7 @@ Approach that uses a single database (default datasource) with two schemas ('bas
 
 Make sure you have a PostgreSQL instance running. To set up a PostgreSQL database with Docker:
 
-> docker run --ulimit memlock=-1:-1 -it --rm=true --memory-swappiness=0 --name quarkus_test -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test -p 5432:5432 postgres:12.2
+> docker run -it --rm=true --name quarkus_test -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test -p 5432:5432 postgres:13.3
 
 Connection properties for the Agroal datasource are defined in the standard Quarkus configuration file, [src/main/resources/application.properties](src/main/resources/application.properties). The database schemas are created using [Flyway](https://quarkus.io/guides/flyway) and the configuration can be found in 
 [src/main/resources/schema/V1.0.0__create_fruits.sql](src/main/resources/schema/V1.0.0__create_fruits.sql).
@@ -72,9 +72,9 @@ Approach that uses a separate database (datasource 'base' and 'mycompany') for s
 
 Make sure you have two PostgreSQL instances running. To set up two PostgreSQL databases with Docker:
 
-> docker run -it --rm=true --ulimit memlock=-1:-1 --memory-swappiness=0 --name quarkus_test -p 127.0.0.1:5432:5432 -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test postgres:12.2
+> docker run -it --rm=true --name quarkus_test -p 127.0.0.1:5432:5432 -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test postgres:13.3
 
-> docker run -it --rm=true --ulimit memlock=-1:-1 --memory-swappiness=0 --name mycompany -p 127.0.0.1:5433:5432 -e POSTGRES_USER=mycompany -e POSTGRES_PASSWORD=mycompany -e POSTGRES_DB=mycompany postgres:12.2
+> docker run -it --rm=true --name mycompany -p 127.0.0.1:5433:5432 -e POSTGRES_USER=mycompany -e POSTGRES_PASSWORD=mycompany -e POSTGRES_DB=mycompany postgres:13.3
 
 The 'quarkus_test' database should be listening on port 5432 and the 'mycompany' on port 5433.
 

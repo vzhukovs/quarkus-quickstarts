@@ -17,15 +17,15 @@ While the code is surprisingly simple, under the hood this is using:
 
 To compile and run this demo you will need:
 
-- JDK 1.8+
+- JDK 11+
 - GraalVM
 
 In addition, you will need either a PostgreSQL database, or Docker to run one.q
 
-### Configuring GraalVM and JDK 1.8+
+### Configuring GraalVM and JDK 11+
 
 Make sure that both the `GRAALVM_HOME` and `JAVA_HOME` environment variables have
-been set, and that a JDK 1.8+ `java` command is on the path.
+been set, and that a JDK 11+ `java` command is on the path.
 
 See the [Building a Native Executable guide](https://quarkus.io/guides/building-native-image)
 for help setting up your environment.
@@ -34,28 +34,11 @@ for help setting up your environment.
 
 Launch the Maven build on the checked out sources of this demo:
 
-> ./mvnw install
+> ./mvnw package
 
 Note that running this command will start an Elasticsearch cluster, start a PostgreSQL instance and run the tests.
 
 ## Running the demo
-
-### Start an Elasticsearch cluster
-
-To set up an Elasticsearch instance using Docker:
-
-> docker run -it --rm=true --name elasticsearch_quarkus_test -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.0
-
-Alternatively you can setup an Elasticsearch instance in any another way.
-
-### Prepare a PostgreSQL instance
-
-Make sure you have a PostgreSQL instance running. To set up a PostgreSQL database with Docker:
-
-> docker run --ulimit memlock=-1:-1 -it --rm=true --memory-swappiness=0 --name postgresql_quarkus_test -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test -p 5432:5432 postgres:11.3
-
-Connection properties for the Agroal datasource are defined in the standard Quarkus configuration file,
-`src/main/resources/application.properties`.
 
 ### Live coding with Quarkus
 
@@ -76,12 +59,23 @@ conventional jar file.
 
 First compile it:
 
-> ./mvnw install
+> ./mvnw package
 
 Note that this command will start a PostgreSQL instance and an Elasticsearch cluster to execute the tests.
 Thus your PostgreSQL and Elasticsearch containers need to be stopped.
 
-Then run it:
+Next we need to make sure you have a PostgreSQL instance and Elasticsearch instance running
+(Quarkus automatically starts one of each for dev and test mode).
+
+To set up a PostgreSQL database using Docker:
+
+> docker run -it --rm=true --name postgresql_quarkus_test -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test -p 5432:5432 postgres:13.3
+
+To set up an Elasticsearch instance using Docker:
+
+> docker run -it --rm=true --name elasticsearch_quarkus_test -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.0
+
+Then run the application:
 
 > java -jar ./target/quarkus-app/quarkus-run.jar
 
@@ -99,7 +93,7 @@ Compiling a native executable takes a bit longer, as GraalVM performs additional
 steps to remove unnecessary codepaths. Use the  `native` profile to compile a
 native executable:
 
-> ./mvnw install -Dnative
+> ./mvnw package -Dnative
 
 After getting a cup of coffee, you'll be able to run this binary directly:
 

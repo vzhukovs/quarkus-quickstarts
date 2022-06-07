@@ -8,14 +8,14 @@ When serving multiple customers from a same application (e.g.: SaaS), each custo
 
 To compile and run this demo you will need:
 
-- JDK 1.8+
+- JDK 11+
 - GraalVM
 - Keycloak
 
-### Configuring GraalVM and JDK 1.8+
+### Configuring GraalVM and JDK 11+
 
 Make sure that both the `GRAALVM_HOME` and `JAVA_HOME` environment variables have
-been set, and that a JDK 1.8+ `java` command is on the path.
+been set, and that a JDK 11+ `java` command is on the path.
 
 See the [Building a Native Executable guide](https://quarkus.io/guides/building-native-image)
 for help setting up your environment.
@@ -24,7 +24,7 @@ for help setting up your environment.
 
 Launch the Maven build on the checked out sources of this demo:
 
-> ./mvnw install
+> ./mvnw package
 
 ## Starting and Configuring the Keycloak Server
 
@@ -83,7 +83,7 @@ user `alice` exists in both tenants, for the application they are distinct users
 When you're done iterating in developer mode, you can run the application as a
 conventional jar file. First compile it:
 
-> ./mvnw install
+> ./mvnw package
 
 Then run it:
 
@@ -102,7 +102,7 @@ Compiling a native executable takes a bit longer, as GraalVM performs additional
 steps to remove unnecessary codepaths. Use the  `native` profile to compile a
 native executable:
 
-> ./mvnw install -Dnative
+> ./mvnw package -Dnative
 
 After getting a cup of coffee, you'll be able to run this executable directly:
 
