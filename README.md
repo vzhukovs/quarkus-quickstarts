@@ -44,23 +44,31 @@ See [CONTRIBUTING](CONTRIBUTING.md) for how to build these examples.
 * [Amazon S3](./amazon-s3-quickstart): How to connect to an Amazon S3 cloud storage
 * [Amazon SNS](./amazon-sns-quickstart): How to connect to an Amazon SNS (Simple Messaging Service)
 * [Amazon SQS](./amazon-sqs-quickstart): How to connect to an Amazon SQS (Simple Queue Service)
+* [Amazon SSM](./amazon-ssm-quickstart): How to connect to Amazon SSM (Simple Systems Manager)
+* [AWT Graphics, ImageIO](./awt-graphics-rest-quickstart): How to create a service that watermarks images and draws text
 * [Hibernate Reactive Panache and RESTEasy Reactive](./hibernate-reactive-quickstart): Exposing a CRUD service over REST using Hibernate Reactive and Panache to connect to a PostgreSQL database
 * [Hibernate Reactive and RESTEasy](./hibernate-reactive-quickstart): Exposing a CRUD service over REST using Hibernate Reactive to connect to a PostgreSQL database
 * [Hibernate Reactive and Vert.x Web](./hibernate-reactive-routes-quickstart): Exposing a CRUD service with Reactive Routes using Hibernate Reactive to connect to a PostgreSQL database
 * [Hibernate ORM and RESTEasy](./hibernate-orm-quickstart): Exposing a CRUD service over REST using Hibernate ORM to connect to a PostgreSQL database
 * [Hibernate ORM with Panache and RESTEasy](./hibernate-orm-panache-quickstart): Exposing a CRUD service over REST using Panache to connect to a PostgreSQL database
+* [Hibernate ORM with Panache and RESTEasy in Kotlin](./hibernate-orm-panache-kotlin-quickstart): Exposing a CRUD service over REST using Panache and kotlin to connect to a PostgreSQL database
 * [Hibernate ORM Multitenancy](./hibernate-orm-quickstart-multi-tenancy): Multitenant CRUD service over REST using Hibernate ORM to connect to a PostgreSQL database (schema or database approach)
 * [Hibernate Search + Elasticsearch](./hibernate-search-orm-elasticsearch-quickstart): Index your Hibernate entities in Elasticsearch to get full text search
 * [Infinispan Client](./infinispan-client-quickstart): How to use Infinispan Client. Covers creating caches and simple get/put
 * [Artemis JMS](./jms-quickstart): How to use the Artemis JMS extension
 * [Kafka](./kafka-quickstart): Use MicroProfile Reactive Messaging to interact with Apache Kafka
-* [Kafka and Hibernate with Panache](./kafka-panache-quickstart): Shows how to combine Kafka and Hibernate with Panache
+* [Kafka and Hibernate with Panache](./kafka-panache-quickstart): Shows how to combine Kafka and (_classic_) Hibernate with Panache
+* [Kafka and Hibernate Reactive with Panache](./kafka-panache-reactive-quickstart): Shows how to combine Kafka and Hibernate Reactive with Panache
 * [Kafka Streams](./kafka-streams-quickstart): Use the Apache Kafka Streams API to implement stream processing applications based on Apache Kafka
 * [Bare Kafka](./kafka-bare-quickstart): How to use the Apache Kafka and Kafka Vert.x clients in Quarkus
 * [Kogito](./kogito-quickstart): How to use Kogito for business process automation with Drools and jBPM
+* [Kogito](./kogito-dmn-quickstart): How to use Kogito for decision automation with Drools DMN Engine
+* [Liquibase](./liquibase-quickstart): How to use Liquibase to manage you schema migrations
+* [Liquibase MongoDB](./liquibase-mongodb-quickstart): How to use Liquibase MongoDB extension to manage you MongoDB migrations
 * [Micrometer](./micrometer-quickstart): How to use Micrometer to gather metrics
 * [MicroProfile Fault Tolerance](./microprofile-fault-tolerance-quickstart): How to use MicroProfile Fault Tolerance
 * [MicroProfile GraphQL](./microprofile-graphql-quickstart): How to use MicroProfile GraphQL
+* [MicroProfile GraphQL Client](./microprofile-graphql-client-quickstart): How to use MicroProfile GraphQL Client
 * [MicroProfile Health](./microprofile-health-quickstart): How to use MicroProfile Health
 * [MicroProfile Metrics](./microprofile-metrics-quickstart): How to use MicroProfile Metrics
 * [MongoDB](./mongodb-quickstart): How to connect to a MongoDB datastore
@@ -68,11 +76,14 @@ See [CONTRIBUTING](CONTRIBUTING.md) for how to build these examples.
 * [MicroProfile Messaging MQTT](./mqtt-quickstart): How to interact with MQTT using MicroProfile reactive messaging
 * [Neo4j](./neo4j-quickstart): How to connect to a Neo4j graph datastore
 * [OpenAPI and Swagger UI](./openapi-swaggerui-quickstart): Use OpenAPI and Swagger UI to expose your REST API and test your REST services
+* [OpenTelemetry](./opentelemetry-quickstart): How to use OpenTelemetry to monitor application performance
 * [OpenTracing and Jaeger](./opentracing-quickstart): How to use MicroProfile OpenTracing and Jaeger to monitor application performances
 * [OptaPlanner](./optaplanner-quickstart): How to use OptaPlanner to optimize business resources
 * [Quartz](./quartz-quickstart): How to schedule periodic clustered jobs
 * [Qute](./qute-quickstart): How to use the Qute templating engine in Quarkus
+* [RabbitMQ](./rabbitmq-quickstart): How to interact with RabbitMQ using MicroProfile reactive messaging
 * [Reactive Routes](./reactive-routes-quickstart): How to use Reactive Routes in Quarkus
+* [REST Client Reactive](./rest-client-quickstart): How to use MicroProfile's REST Client with Reactive client
 * [REST Client](./rest-client-quickstart): How to use MicroProfile's REST Client
 * [REST Client Multipart](./rest-client-multipart-quickstart): Handle multipart with MicroProfile's REST Client
 * [JSON REST services](./rest-json-quickstart): How to write JSON REST services
@@ -82,6 +93,8 @@ See [CONTRIBUTING](CONTRIBUTING.md) for how to build these examples.
 * [Security with MicroProfile JWT](./security-jwt-quickstart): How to use MicroProfile JWT RBAC
 * [Security with OAuth2 opaque tokens](./security-oauth2-quickstart): How to use our security layer with OAuth2 opaque tokens
 * [Security with OpenId Connect](./security-openid-connect-quickstart): How to use OpenId Connect and [Keycloak](https://www.keycloak.org)
+* [Security with MicroProfile JWT](./security-jwt-quickstart): How to use MicroProfile JWT RBAC
+* [Security with WebAuthn](./security-webauthn-quickstart): Authenticate your users using WebAuthn
 * [Supporting Multi-Tenancy in OpenID Connect Applications](./security-openid-connect-multi-tenancy): How to use OpenId Connect and [Keycloak](https://www.keycloak.org)
 * [Spring DI compatibility layer](./spring-di-quickstart): How to use our Spring Dependency Injection compatibility layer
 * [Spring Data extension](./spring-data-jpa-quickstart): How to use the Quarkus extension for the Spring Data API
@@ -91,6 +104,7 @@ See [CONTRIBUTING](CONTRIBUTING.md) for how to build these examples.
 * [Spring Scheduled extension](./spring-scheduled-quickstart): How to use the Quarkus extension for the Spring Scheduled annotation
 * [Spring Data REST extension](./spring-data-rest-quickstart): How to use the Quarkus extension for the Spring Data REST
 * [Using STM](./software-transactional-memory-quickstart): How to use the Narayana Software Transactional Memory extension
+* [Stork](./stork-quickstart): How to discover and select services
 * [Apache Tika](./tika-quickstart): Extract metadata and content from your documents
 * [Validation with Hibernate Validator](./validation-quickstart): How to use Hibernate Validator/Bean Validation in your REST services
 * [Using Vert.x](./vertx-quickstart): How to use the Vert.x extension
@@ -110,7 +124,10 @@ See [CONTRIBUTING](CONTRIBUTING.md) for how to build these examples.
 
 * [Google Cloud Functions](./google-cloud-functions-quickstart): How to create Google Cloud Functions
 * [Google Cloud Functions HTTP](./google-cloud-functions-http-quickstart): How to bind our HTTP layer (JAX-RS, Servlet or Reactive Route) to Google Cloud Functions
+* [JTA](./jta-quickstart): How use JTA transactions with HTTP/REST
+* [Reactive Messaging with HTTP](./reactive-messaging-http-quickstart): How to consume and produce HTTP messages with Reactive Messaging
+* [Reactive Messaging with Web Sockets](./reactive-messaging-websockets-quickstart): How to consume and produce messages via Web Sockets with Reactive Messaging
 
 
-There is documentation published at <https://quarkus.io> (docs' [sources are here](https://github.com/quarkusio/quarkus/tree/master/docs/src/main/asciidoc)).
+There is documentation published at <https://quarkus.io> (docs' [sources are here](https://github.com/quarkusio/quarkus/tree/main/docs/src/main/asciidoc)).
 

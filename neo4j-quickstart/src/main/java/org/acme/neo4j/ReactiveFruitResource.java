@@ -9,14 +9,13 @@ import javax.ws.rs.core.MediaType;
 
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.reactive.RxResult;
+import org.neo4j.driver.reactive.RxSession;
 import org.reactivestreams.Publisher;
 
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 
 @Path("reactivefruits")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class ReactiveFruitResource {
 
     @Inject
@@ -25,7 +24,7 @@ public class ReactiveFruitResource {
     @GET
     @Produces(MediaType.SERVER_SENT_EVENTS)
     public Publisher<String> get() {
-        return Multi.createFrom().resource(
+        return Multi.createFrom().<RxSession, String>resource(
                 driver::rxSession,
                 session -> session.readTransaction(tx -> {
                     RxResult result = tx.run("MATCH (f:Fruit) RETURN f.name as name ORDER BY f.name");

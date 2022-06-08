@@ -10,10 +10,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.jboss.resteasy.annotations.SseElementType;
+import org.jboss.resteasy.reactive.RestStreamElementType;
 import org.reactivestreams.Publisher;
 
 import io.smallrye.mutiny.Multi;
+import io.smallrye.mutiny.infrastructure.Infrastructure;
 
 @Path("/")
 public class EmitterResource {
@@ -26,11 +27,14 @@ public class EmitterResource {
     @GET
     @Path("/prices")
     @Produces(MediaType.SERVER_SENT_EVENTS)
-    @SseElementType(MediaType.TEXT_PLAIN)
+    @RestStreamElementType(MediaType.TEXT_PLAIN)
     public Publisher<Double> prices() {
         // get the next three prices from the price stream
         return Multi.createFrom().publisher(prices)
-                .transform().byTakingFirstItems(3)
+                .select().first(3)
+                // The items are received from the event loop, so cannot use Hibernate ORM (classic)
+                // Switch to a worker thread, the transaction will be propagated
+                .emitOn(Infrastructure.getDefaultExecutor())
                 .map(price -> {
                     // store each price before we send them
                     Price priceEntity = new Price();
@@ -45,7 +49,6 @@ public class EmitterResource {
 
     @GET
     @Path("/prices/all")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<Price> getAllPrices() {
         return Price.listAll();
     }
