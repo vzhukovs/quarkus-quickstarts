@@ -4,7 +4,7 @@ metadata:
 components:
   - name: tools
     container:
-      image: quay.io/devfile/universal-developer-image:ubi8-0e189d9
+      image: quay.io/devfile/universal-developer-image:ubi8-3055e6d
       env:
         - name: QUARKUS_HTTP_HOST
           value: 0.0.0.0
@@ -21,7 +21,7 @@ components:
       volumeMounts:
         - name: m2
           path: /home/user/.m2
-      memoryLimit: 4G
+      memoryLimit: 4.7G
       mountSources: true
 
   - name: ubi-minimal
@@ -41,7 +41,7 @@ commands:
     exec:
       component: tools
       workingDir: ${PROJECT_SOURCE}/getting-started
-      commandLine: "./mvnw package"
+      commandLine: "mvn package"
       group:
         kind: build
         isDefault: true
@@ -51,7 +51,7 @@ commands:
       label: "Package Native"
       component: tools
       workingDir: ${PROJECT_SOURCE}/getting-started
-      commandLine: "./mvnw package -Dnative -Dmaven.test.skip -Dquarkus.native.native-image-xmx=2G"
+      commandLine: "mvn package -Dnative -Dmaven.test.skip -Dquarkus.native.native-image-xmx=2G"
       group:
         kind: build
 
@@ -60,7 +60,7 @@ commands:
       label: "Start Development mode (Hot reload + debug)"
       component: tools
       workingDir: ${PROJECT_SOURCE}/getting-started
-      commandLine: "./mvnw compile quarkus:dev"
+      commandLine: "mvn compile quarkus:dev"
       group:
         kind: run
         isDefault: true
